@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">nfctron_app</string>
+    <string name="error">An error occurred. Please try again.</string>
+    <string name="retry">Retry</string>
+    <string name="refresh">Refresh</string>
+    <string name="watchlist">Watchlist</string>
+    <string name="add">Add</string>
+    <string name="usd">%1$s $</string>
+    <string name="percentage">%1$s %%</string>
+</resources>

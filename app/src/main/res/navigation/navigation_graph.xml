@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/fragmentDaily">
+
+    <fragment
+        android:id="@+id/fragmentDaily"
+        android:name="com.example.nfctron_app.daily.DailyFragment"
+        android:label="FragmentWatchlist"
+        tools:layout="@layout/fragment_daily" >
+    </fragment>
+</navigation>
