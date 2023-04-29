@@ -10,8 +10,8 @@ interface NasaDailyDao {
     @Insert
     suspend fun insertNasaDaily(string: NasaDaily)
 
-    @Query("DELETE FROM daily WHERE date = :date")
-    suspend fun deleteNasaDaily(date: String)
+    @Query("DELETE FROM daily")
+    suspend fun deleteNasaDaily()
 
     @Query("SELECT * FROM daily ORDER BY id DESC LIMIT 1")
     suspend fun getNasaDaily(): NasaDaily

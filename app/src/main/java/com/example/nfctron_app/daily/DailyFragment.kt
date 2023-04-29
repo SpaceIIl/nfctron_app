@@ -52,7 +52,11 @@ class DailyFragment : Fragment() {
                     }
                     viewLifecycleOwner.lifecycleScope.launch {
                         val nasaDailyList = NasaDailyRepository.getNasaDaily()
-                        binding.textDate.text = nasaDailyList.date
+                        binding.textTitle.text = nasaDailyList.title
+                        binding.textDateNumber.text = nasaDailyList.date
+                        binding.textDate.text = getString(R.string.today)
+                        binding.textSubheading.text = getString(R.string.explanation)
+                        binding.textExplanation.text = nasaDailyList.explanation
                     }
                 }
                 is DailyScreenState.Loading -> {
@@ -73,6 +77,20 @@ class DailyFragment : Fragment() {
                     binding.textExplanation.text = state.data.explanation
                     binding.image.load(state.data.url)
                     binding.image.load(state.data.hdurl)
+
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        if (state.data.date > NasaDailyRepository.getNasaDaily().date)
+                            NasaDailyRepository.deleteNasaDaily()
+
+                        if (NasaDailyRepository.getNasaDaily().date != state.data.date)
+                            NasaDailyRepository.insertNasaDaily(
+                                date = state.data.date,
+                                explanation = state.data.explanation,
+                                hdurl = state.data.hdurl,
+                                title = state.data.title,
+                                url = state.data.url
+                            )
+                    }
 
 //                    context?.let { context ->
 //                        val request = ImageRequest.Builder(context)

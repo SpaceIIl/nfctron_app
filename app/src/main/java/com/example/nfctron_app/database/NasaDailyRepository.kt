@@ -12,13 +12,7 @@ object NasaDailyRepository {
         App.instance.applicationContext,
         AppDatabase::class.java,
         "app_database"
-    ).addCallback(object : RoomDatabase.Callback() {
-        override fun onCreate(db: SupportSQLiteDatabase) {
-            super.onCreate(db)
-
-            db.execSQL("INSERT INTO daily (date) VALUES ('2023-04-27'), ('2023-04-29')")
-        }
-    }).build()
+    ).build()
 
     private val nasaDailyDao = database.nasaDailyDao()
 
@@ -26,8 +20,6 @@ object NasaDailyRepository {
         date: String,
         explanation: String,
         hdurl: String,
-        mediaType: String,
-        serviceVersion: String,
         title: String,
         url: String
     ) {
@@ -36,8 +28,6 @@ object NasaDailyRepository {
                 date = date,
                 explanation = explanation,
                 hdurl = hdurl,
-                media_type = mediaType,
-                service_version = serviceVersion,
                 title = title,
                 url = url
             )
@@ -45,9 +35,9 @@ object NasaDailyRepository {
         }
     }
 
-    suspend fun deleteNasaDaily(date: String) {
+    suspend fun deleteNasaDaily() {
         withContext(Dispatchers.IO){
-            nasaDailyDao.deleteNasaDaily(date)
+            nasaDailyDao.deleteNasaDaily()
         }
     }
 
