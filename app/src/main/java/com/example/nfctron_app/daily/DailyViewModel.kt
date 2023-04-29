@@ -24,7 +24,7 @@ class DailyViewModel : ViewModel() {
                 val daily = getNasaDaily().body()!!
                 _screenState.postValue(DailyScreenState.Success(daily))
             }catch (exception: Exception){
-                _screenState.postValue(DailyScreenState.Error(Throwable()))
+                _screenState.postValue(DailyScreenState.Error)
             }
         }
     }

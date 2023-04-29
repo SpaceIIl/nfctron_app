@@ -15,8 +15,8 @@ object NasaDailyRepository {
     ).addCallback(object : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
-            // Set default value for symbol field
-            db.execSQL("INSERT INTO date (date) VALUES ('BTCUSDT'), ('ETHUSDT'), ('BNBUSDT')")
+
+            db.execSQL("INSERT INTO daily (date) VALUES ('2023-04-27'), ('2023-04-29')")
         }
     }).build()
 
@@ -50,4 +50,11 @@ object NasaDailyRepository {
             nasaDailyDao.deleteNasaDaily(date)
         }
     }
+
+    suspend fun getNasaDaily(): List<NasaDaily> {
+        return withContext(Dispatchers.IO) {
+            nasaDailyDao.getNasaDaily()
+        }
+    }
+
 }
