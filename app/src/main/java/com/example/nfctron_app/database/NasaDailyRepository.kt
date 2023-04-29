@@ -51,7 +51,7 @@ object NasaDailyRepository {
         }
     }
 
-    suspend fun getNasaDaily(): List<NasaDaily> {
+    suspend fun getNasaDaily(): NasaDaily {
         return withContext(Dispatchers.IO) {
             nasaDailyDao.getNasaDaily()
         }

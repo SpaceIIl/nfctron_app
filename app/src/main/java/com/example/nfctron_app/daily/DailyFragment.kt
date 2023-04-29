@@ -5,11 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.nfctron_app.database.AppDatabase
-import com.example.nfctron_app.database.NasaDaily
+import coil.imageLoader
+import coil.load
+import coil.request.ImageRequest
+import com.example.nfctron_app.R
 import com.example.nfctron_app.database.NasaDailyRepository
 import com.example.nfctron_app.databinding.FragmentDailyBinding
 import kotlinx.coroutines.launch
@@ -37,7 +41,7 @@ class DailyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.screenState.observe(viewLifecycleOwner) { state ->
-            when(state){
+            when (state) {
                 is DailyScreenState.Error -> {
                     with(binding) {
                         progressDaily.visibility = View.GONE
@@ -48,8 +52,7 @@ class DailyFragment : Fragment() {
                     }
                     viewLifecycleOwner.lifecycleScope.launch {
                         val nasaDailyList = NasaDailyRepository.getNasaDaily()
-                        binding.textDate.text = nasaDailyList.toString()
-                        binding.textImg.text = nasaDailyList.toString()
+                        binding.textDate.text = nasaDailyList.date
                     }
                 }
                 is DailyScreenState.Loading -> {
@@ -63,9 +66,27 @@ class DailyFragment : Fragment() {
                         progressDaily.visibility = View.GONE
                         retryButton.visibility = View.GONE
                     }
-                    //bindPoolWrapper(state.data)
                     binding.textDate.text = state.data.date
-                    binding.textImg.text = state.data.id.toString()
+                    //binding.myImageView.load(state.data.hdurl)
+
+                    context?.let { context ->
+                        val request = ImageRequest.Builder(context)
+                            .data("state.data.url")
+                            .target(onSuccess = { result ->
+                                binding.image.setImageDrawable(result)
+                                binding.image.postDelayed({
+                                    val hdRequest = ImageRequest.Builder(context)
+                                        .data(state.data.hdurl)
+                                        .target(onSuccess = { hdResult ->
+                                            binding.image.setImageDrawable(hdResult)
+                                        })
+                                        .build()
+                                    context.imageLoader.enqueue(hdRequest)
+                                }, 1000)
+                            })
+                            .build()
+                        context.imageLoader.enqueue(request)
+                    }
                 }
             }
         }

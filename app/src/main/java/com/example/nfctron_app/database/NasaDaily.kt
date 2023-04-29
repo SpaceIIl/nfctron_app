@@ -8,7 +8,6 @@ import androidx.room.PrimaryKey
 data class NasaDaily(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0L,
-    //@ColumnInfo(name = "date")
     val date: String?,
     val explanation: String?,
     val hdurl: String?,
