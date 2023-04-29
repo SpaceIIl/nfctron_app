@@ -66,27 +66,32 @@ class DailyFragment : Fragment() {
                         progressDaily.visibility = View.GONE
                         retryButton.visibility = View.GONE
                     }
-                    binding.textDate.text = state.data.date
-                    //binding.myImageView.load(state.data.hdurl)
+                    binding.textTitle.text = state.data.title
+                    binding.textDateNumber.text = state.data.date
+                    binding.textDate.text = getString(R.string.today)
+                    binding.textSubheading.text = getString(R.string.explanation)
+                    binding.textExplanation.text = state.data.explanation
+                    binding.image.load(state.data.url)
+                    binding.image.load(state.data.hdurl)
 
-                    context?.let { context ->
-                        val request = ImageRequest.Builder(context)
-                            .data("state.data.url")
-                            .target(onSuccess = { result ->
-                                binding.image.setImageDrawable(result)
-                                binding.image.postDelayed({
-                                    val hdRequest = ImageRequest.Builder(context)
-                                        .data(state.data.hdurl)
-                                        .target(onSuccess = { hdResult ->
-                                            binding.image.setImageDrawable(hdResult)
-                                        })
-                                        .build()
-                                    context.imageLoader.enqueue(hdRequest)
-                                }, 1000)
-                            })
-                            .build()
-                        context.imageLoader.enqueue(request)
-                    }
+//                    context?.let { context ->
+//                        val request = ImageRequest.Builder(context)
+//                            .data(state.data.url)
+//                            .target(onSuccess = { result ->
+//                                binding.image.setImageDrawable(result)
+//                                binding.image.postDelayed({
+//                                    val hdRequest = ImageRequest.Builder(context)
+//                                        .data(state.data.hdurl)
+//                                        .target(onSuccess = { hdResult ->
+//                                            binding.image.setImageDrawable(hdResult)
+//                                        })
+//                                        .build()
+//                                    context.imageLoader.enqueue(hdRequest)
+//                                }, 1000)
+//                            })
+//                            .build()
+//                        context.imageLoader.enqueue(request)
+//                    }
                 }
             }
         }

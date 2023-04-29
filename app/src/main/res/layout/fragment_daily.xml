@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ProgressBar
             android:id="@+id/progressDaily"
@@ -26,69 +28,88 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="@string/retry" />
 
-        <ImageView
-            android:id="@+id/image"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewDaily"
             android:layout_width="match_parent"
-            android:layout_height="600dp"
-            android:layout_margin="@dimen/margin_base_x2"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="520dp"
+            android:layout_margin="@dimen/margin_base_x4"
+            app:cardCornerRadius="@dimen/margin_base_x2"
+            app:cardElevation="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/textTitle"
+            android:textAppearance="@style/h3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_base_x2"
-            app:layout_constraintEnd_toEndOf="@id/image"
-            app:layout_constraintStart_toStartOf="@id/image"
-            app:layout_constraintTop_toTopOf="@id/image"
+            android:layout_marginHorizontal="@dimen/margin_base_x6"
+            android:layout_marginVertical="@dimen/margin_base_x2"
+            app:layout_constraintEnd_toEndOf="@id/cardViewDaily"
+            app:layout_constraintStart_toStartOf="@id/cardViewDaily"
+            app:layout_constraintTop_toTopOf="@id/cardViewDaily"
             tools:text="Solar Eclipse from a Ship" />
 
         <TextView
             android:id="@+id/textDateNumber"
+            android:textAppearance="@style/pFade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/image"
-            app:layout_constraintStart_toStartOf="@id/image"
+            app:layout_constraintEnd_toEndOf="@id/cardViewDaily"
+            app:layout_constraintStart_toStartOf="@id/cardViewDaily"
             app:layout_constraintBottom_toTopOf="@id/textDate"
-            android:layout_margin="@dimen/margin_base_x2"
-            android:layout_marginBottom="@dimen/margin_base"
+            android:layout_marginHorizontal="@dimen/margin_base_x6"
+            android:layout_marginVertical="@dimen/margin_base"
             tools:text="2023-04-29" />
 
         <TextView
             android:id="@+id/textDate"
+            android:textAppearance="@style/h1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/image"
-            app:layout_constraintStart_toStartOf="@id/image"
-            app:layout_constraintBottom_toBottomOf="@id/image"
-            android:layout_margin="@dimen/margin_base_x2"
+            android:layout_marginHorizontal="@dimen/margin_base_x6"
+            android:layout_marginVertical="@dimen/margin_base_x2"
+            app:layout_constraintBottom_toBottomOf="@id/cardViewDaily"
+            app:layout_constraintEnd_toEndOf="@id/cardViewDaily"
+            app:layout_constraintStart_toStartOf="@id/cardViewDaily"
             tools:text="TODAY" />
 
         <TextView
             android:id="@+id/textSubheading"
+            android:textAppearance="@style/h1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image"
-            android:layout_margin="@dimen/margin_base_x2"
+            app:layout_constraintTop_toBottomOf="@id/cardViewDaily"
+            android:layout_margin="@dimen/margin_base_x4"
             tools:text="Explanation" />
 
         <TextView
             android:id="@+id/textExplanation"
+            android:textAppearance="@style/p"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textSubheading"
-            android:layout_margin="@dimen/margin_base_x2"
+            android:layout_marginHorizontal="@dimen/margin_base_x4"
+            android:layout_marginTop="@dimen/margin_base"
+            android:layout_marginBottom="@dimen/margin_base_x4"
             tools:text="Along a narrow path that mostly avoided landfall, the shadow of the New Moon raced across planet Earth's southern hemisphere on April 20 to create a rare annular-total or hybrid solar eclipse. From the Indian Ocean off the coast of western Australia, ship-borne eclipse chasers were able to witness 62 seconds of totality though while anchored near the centerline of the total eclipse track. This ship-borne image of the eclipse captures the active Sun's magnificent outer atmosphere or solar corona streaming into space. A composite of 11 exposures ranging from 1/2000 to 1/2 second, it records an extended range of brightness to follow details of the corona not quite visible to the eye during the total eclipse phase. Of course eclipses tend to come in pairs. On May 5, the next Full Moon will just miss the dark inner part of Earth's shadow in a penumbral lunar eclipse.   Total Solar Eclipse of 2023 April Gallery: Notable Submissions to APOD" />
 
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</ScrollView>
