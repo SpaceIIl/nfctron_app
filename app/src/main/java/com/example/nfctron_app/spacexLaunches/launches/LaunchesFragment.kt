@@ -1,4 +1,6 @@
 package com.example.nfctron_app.spacexLaunches.launches
 
-class LaunchesFragment {
+import androidx.fragment.app.Fragment
+
+class LaunchesFragment : Fragment() {
 }

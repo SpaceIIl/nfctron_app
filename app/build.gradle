@@ -88,4 +88,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
     implementation("io.coil-kt:coil:2.3.0")
+
+    implementation 'com.github.jama5262:CarouselView:1.2.2'
 }

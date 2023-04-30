@@ -8,7 +8,13 @@
     <fragment
         android:id="@+id/fragmentDaily"
         android:name="com.example.nfctron_app.nasaDaily.daily.DailyFragment"
-        android:label="FragmentWatchlist"
+        android:label="FragmentDaily"
         tools:layout="@layout/fragment_daily" >
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentLaunches"
+        android:name="com.example.nfctron_app.spacexLaunches.launches.LaunchesFragment"
+        android:label="FragmentLaunches"
+        tools:layout="@layout/fragment_launches" >
     </fragment>
 </navigation>

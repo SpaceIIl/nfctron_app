@@ -4,4 +4,8 @@
         android:id="@+id/fragmentDaily"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="Daily"/>
+    <item
+        android:id="@+id/fragmentLaunches"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Launches"/>
 </menu>
