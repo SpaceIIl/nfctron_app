@@ -1,6 +1,5 @@
-package com.example.nfctron_app.database
+package com.example.nfctron_app.nasaDaily.databaseNasaDaily
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

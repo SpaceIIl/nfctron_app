@@ -1,7 +1,6 @@
 package com.example.nfctron_app
 
-import com.example.nfctron_app.database.NasaDaily
-import com.example.nfctron_app.model.pvod
+import com.example.nfctron_app.nasaDaily.databaseNasaDaily.NasaDaily
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -1,20 +1,15 @@
-package com.example.nfctron_app.daily
+package com.example.nfctron_app.nasaDaily.daily
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import coil.imageLoader
 import coil.load
-import coil.request.ImageRequest
 import com.example.nfctron_app.R
-import com.example.nfctron_app.database.NasaDailyRepository
+import com.example.nfctron_app.nasaDaily.databaseNasaDaily.NasaDailyRepository
 import com.example.nfctron_app.databinding.FragmentDailyBinding
 import kotlinx.coroutines.launch
 
@@ -45,44 +40,51 @@ class DailyFragment : Fragment() {
                 is DailyScreenState.Error -> {
                     with(binding) {
                         progressDaily.visibility = View.GONE
-                        retryButton.visibility = View.VISIBLE
-                        retryButton.setOnClickListener {
-                            viewModel.retryLoadingData()
-                        }
                     }
                     viewLifecycleOwner.lifecycleScope.launch {
                         val nasaDailyList = NasaDailyRepository.getNasaDaily()
-                        binding.textTitle.text = nasaDailyList.title
-                        binding.textDateNumber.text = nasaDailyList.date
-                        binding.textDate.text = getString(R.string.today)
-                        binding.textSubheading.text = getString(R.string.explanation)
-                        binding.textExplanation.text = nasaDailyList.explanation
+                        with(binding) {
+                            textTitle.text = nasaDailyList.title
+                            textDateNumber.text = nasaDailyList.date
+                            textDate.text = getString(R.string.today)
+                            textSubheading.text = getString(R.string.explanation)
+                            textExplanation.text = nasaDailyList.explanation
+
+                            swipeRefresh.isRefreshing = false
+                            swipeRefresh.setOnRefreshListener {
+                                viewModel.retryLoadingData()
+                            }
+                        }
                     }
                 }
                 is DailyScreenState.Loading -> {
                     with(binding) {
                         progressDaily.visibility = View.VISIBLE
-                        retryButton.visibility = View.GONE
                     }
                 }
                 is DailyScreenState.Success -> {
                     with(binding) {
                         progressDaily.visibility = View.GONE
-                        retryButton.visibility = View.GONE
+                        textTitle.text = state.data.title
+                        textDateNumber.text = state.data.date
+                        textDate.text = getString(R.string.today)
+                        textSubheading.text = getString(R.string.explanation)
+                        textExplanation.text = state.data.explanation
+                        image.load(state.data.url)
+                        image.load(state.data.hdurl)
+
+                        swipeRefresh.isRefreshing = false
+                        swipeRefresh.setOnRefreshListener {
+                            viewModel.retryLoadingData()
+                        }
                     }
-                    binding.textTitle.text = state.data.title
-                    binding.textDateNumber.text = state.data.date
-                    binding.textDate.text = getString(R.string.today)
-                    binding.textSubheading.text = getString(R.string.explanation)
-                    binding.textExplanation.text = state.data.explanation
-                    binding.image.load(state.data.url)
-                    binding.image.load(state.data.hdurl)
 
                     viewLifecycleOwner.lifecycleScope.launch {
-                        if (state.data.date > NasaDailyRepository.getNasaDaily().date)
-                            NasaDailyRepository.deleteNasaDaily()
+                        //val dateNumberNew = LocalDate.parse(state.data.date).toEpochDay()
+                        //val dateNumberOld = LocalDate.parse(NasaDailyRepository.getNasaDaily().date).toEpochDay()
 
-                        if (NasaDailyRepository.getNasaDaily().date != state.data.date)
+                        if (state.data.date > (NasaDailyRepository.getNasaDaily()?.date ?: "")) {
+                            NasaDailyRepository.deleteNasaDaily()
                             NasaDailyRepository.insertNasaDaily(
                                 date = state.data.date,
                                 explanation = state.data.explanation,
@@ -90,7 +92,7 @@ class DailyFragment : Fragment() {
                                 title = state.data.title,
                                 url = state.data.url
                             )
-                    }
+                        }
 
 //                    context?.let { context ->
 //                        val request = ImageRequest.Builder(context)
@@ -110,6 +112,7 @@ class DailyFragment : Fragment() {
 //                            .build()
 //                        context.imageLoader.enqueue(request)
 //                    }
+                    }
                 }
             }
         }

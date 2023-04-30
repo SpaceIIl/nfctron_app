@@ -1,7 +1,6 @@
-package com.example.nfctron_app.daily
+package com.example.nfctron_app.nasaDaily.daily
 
-import com.example.nfctron_app.database.NasaDaily
-import com.example.nfctron_app.model.pvod
+import com.example.nfctron_app.nasaDaily.databaseNasaDaily.NasaDaily
 
 sealed class DailyScreenState {
     data class Success(val data: NasaDaily) : DailyScreenState()

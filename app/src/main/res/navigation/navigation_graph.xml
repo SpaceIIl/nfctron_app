@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragmentDaily"
-        android:name="com.example.nfctron_app.daily.DailyFragment"
+        android:name="com.example.nfctron_app.nasaDaily.daily.DailyFragment"
         android:label="FragmentWatchlist"
         tools:layout="@layout/fragment_daily" >
     </fragment>

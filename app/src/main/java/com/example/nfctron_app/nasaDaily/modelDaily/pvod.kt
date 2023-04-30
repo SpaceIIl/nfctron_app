@@ -1,4 +1,4 @@
-package com.example.nfctron_app.model
+package com.example.nfctron_app.nasaDaily.modelDaily
 
 data class pvod(
     val date: String?,

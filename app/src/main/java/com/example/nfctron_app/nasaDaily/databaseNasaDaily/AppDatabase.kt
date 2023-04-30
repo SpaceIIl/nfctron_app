@@ -1,4 +1,4 @@
-package com.example.nfctron_app.database
+package com.example.nfctron_app.nasaDaily.databaseNasaDaily
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

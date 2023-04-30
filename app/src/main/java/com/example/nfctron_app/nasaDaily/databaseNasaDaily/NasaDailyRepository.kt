@@ -1,8 +1,6 @@
-package com.example.nfctron_app.database
+package com.example.nfctron_app.nasaDaily.databaseNasaDaily
 
 import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.nfctron_app.App
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

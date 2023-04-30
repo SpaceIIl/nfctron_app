@@ -1,8 +1,7 @@
-package com.example.nfctron_app.database
+package com.example.nfctron_app.nasaDaily.databaseNasaDaily
 
 import androidx.room.Dao
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao

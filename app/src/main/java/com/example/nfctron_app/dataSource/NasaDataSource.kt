@@ -1,8 +1,7 @@
-package com.example.nfctron_app.nasa
+package com.example.nfctron_app.dataSource
 
 import com.example.nfctron_app.ApiService
-import com.example.nfctron_app.database.NasaDaily
-import com.example.nfctron_app.model.pvod
+import com.example.nfctron_app.nasaDaily.databaseNasaDaily.NasaDaily
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Response
