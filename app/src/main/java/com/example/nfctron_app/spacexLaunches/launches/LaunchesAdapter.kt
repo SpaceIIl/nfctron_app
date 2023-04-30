@@ -20,6 +20,7 @@ class LaunchesAdapter:
     inner class ItemViewHolder(private val binding: ItemLaunchBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: LaunchesItem) {
             binding.textLaunchTitle.text = item.name
+            binding.textCountdown.text = item.date_unix.toString()
         }
     }
 

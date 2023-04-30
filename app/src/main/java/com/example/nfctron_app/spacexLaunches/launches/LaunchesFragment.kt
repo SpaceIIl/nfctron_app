@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nfctron_app.R
 import com.example.nfctron_app.databinding.FragmentLaunchesBinding
 import com.example.nfctron_app.databinding.ItemLaunchBinding
 
@@ -33,13 +34,16 @@ class LaunchesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.textPinned.text = getString(R.string.pinned)
+        binding.textUnpinAll.text = getString(R.string.unpin_all)
+        binding.textUpcoming.text = getString(R.string.upcoming)
+        binding.textSortBy.text = getString(R.string.sort_by)
+
         val launchesAdapter = LaunchesAdapter()
 
         binding.recyclerPinned.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = launchesAdapter
-            Log.d("fragment1", "$layoutManager")
-            Log.d("fragment2", "$adapter")
         }
 
         viewModel.screenState.observe(viewLifecycleOwner) { state ->
@@ -59,17 +63,13 @@ class LaunchesFragment : Fragment() {
                 }
                 is LaunchesScreenState.Success -> {
                     with(binding) {
-//                        progressPool.visibility = View.GONE
-//                        retryButton.visibility = View.GONE
-//                        recyclerMyData.visibility = View.VISIBLE
-//                        textLatestTransactions.text = getString(R.string.latest_transactions)
+                        progressLaunches.visibility = View.GONE
                         swipeRefreshLaunches.isRefreshing = false
                         swipeRefreshLaunches.setOnRefreshListener {
                             viewModel.retryLoadingData()
                         }
                     }
 
-                    Log.d("fragment3", "" + state.data)
                     launchesAdapter.submitList(state.data)
                     binding.recyclerPinned.post {
                         binding.recyclerPinned.layoutManager?.scrollToPosition(0)

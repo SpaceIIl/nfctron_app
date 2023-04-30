@@ -51,7 +51,7 @@
         android:id="@+id/iconImageView"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/baseline_push_pin_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/item_launch"
         app:layout_constraintTop_toTopOf="@id/item_launch" />
@@ -71,7 +71,7 @@
             android:layout_width="20dp"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/baseline_play_arrow_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -95,7 +95,7 @@
         android:layout_height="30dp"
         android:scaleType="centerCrop"
         android:layout_marginHorizontal="@dimen/margin_base_x1"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/baseline_link_24"
         app:layout_constraintStart_toEndOf="@id/cardLivestream"
         app:layout_constraintTop_toTopOf="@id/cardLivestream"/>
 
@@ -107,6 +107,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/iconShare"
         app:layout_constraintTop_toTopOf="@id/iconShare"
-        tools:text="Livestream" />
+        tools:text="Wiki" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

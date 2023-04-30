@@ -6,4 +6,8 @@
     <string name="usd">%1$s $</string>
     <string name="today">Today</string>
     <string name="explanation">Explanation</string>
+    <string name="pinned">Pinned</string>
+    <string name="unpin_all">Unpin all</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="sort_by">Sort by</string>
 </resources>
