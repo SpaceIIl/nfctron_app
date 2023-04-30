@@ -1,6 +1,6 @@
-package com.example.nfctron_app.dataSource
+package com.example.nfctron_app.nasaDaily.nasaDataSource
 
-import com.example.nfctron_app.ApiService
+import com.example.nfctron_app.nasaDaily.nasaService.NasaService
 import com.example.nfctron_app.nasaDaily.databaseNasaDaily.NasaDaily
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -17,7 +17,7 @@ object NasaDataSource {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 
-        retrofit.create(ApiService::class.java)
+        retrofit.create(NasaService::class.java)
     }
 
     suspend fun getNasaDaily(): Response<NasaDaily> {

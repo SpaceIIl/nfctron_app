@@ -11,6 +11,7 @@ import coil.load
 import com.example.nfctron_app.R
 import com.example.nfctron_app.nasaDaily.databaseNasaDaily.NasaDailyRepository
 import com.example.nfctron_app.databinding.FragmentDailyBinding
+import com.example.nfctron_app.spacexLaunches.launches.DailyViewModel
 import kotlinx.coroutines.launch
 
 class DailyFragment : Fragment() {

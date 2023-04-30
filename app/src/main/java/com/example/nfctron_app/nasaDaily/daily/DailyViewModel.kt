@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import com.example.nfctron_app.dataSource.NasaDataSource.getNasaDaily
+import com.example.nfctron_app.nasaDaily.nasaDataSource.NasaDataSource.getNasaDaily
 
 class DailyViewModel : ViewModel() {
     private val _screenState = MutableLiveData<DailyScreenState>()
