@@ -63,8 +63,7 @@
                 android:layout_marginHorizontal="@dimen/margin_base_x6"
                 android:layout_marginVertical="@dimen/margin_base_x4"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textPinned"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/textPinned" />
 
             <TextView
                 android:id="@+id/textUpcoming"
@@ -87,26 +86,27 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Unpin All" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerUpcoming"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                app:layout_constraintHeight_max="200dp"
-                android:layout_marginHorizontal="@dimen/margin_base_x6"
-                android:layout_marginVertical="@dimen/margin_base_x4"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textPinned"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-            <com.jama.carouselview.CarouselView
-                android:id="@+id/carouselView"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/carouselUpcoming"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginHorizontal="@dimen/margin_base_x6"
                 android:layout_marginVertical="@dimen/margin_base_x4"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textPinned"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/textUpcoming" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:tabIndicator="@null"
+                app:tabBackground="@drawable/ic_launcher_background"
+                app:tabGravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/carouselUpcoming"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
