@@ -50,8 +50,8 @@ class DailyFragment : Fragment() {
                             textSubheading.text = getString(R.string.explanation)
                             textExplanation.text = nasaDailyList.explanation
 
-                            swipeRefresh.isRefreshing = false
-                            swipeRefresh.setOnRefreshListener {
+                            swipeRefreshDaily.isRefreshing = false
+                            swipeRefreshDaily.setOnRefreshListener {
                                 viewModel.retryLoadingData()
                             }
                         }
@@ -73,8 +73,8 @@ class DailyFragment : Fragment() {
                         image.load(state.data.url)
                         image.load(state.data.hdurl)
 
-                        swipeRefresh.isRefreshing = false
-                        swipeRefresh.setOnRefreshListener {
+                        swipeRefreshDaily.isRefreshing = false
+                        swipeRefreshDaily.setOnRefreshListener {
                             viewModel.retryLoadingData()
                         }
                     }

@@ -1,5 +1,6 @@
 package com.example.nfctron_app.spacexLaunches.launches
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,6 +30,7 @@ class LaunchesViewModel : ViewModel() {
             }
         }
     }
+
 
     fun retryLoadingData() {
         loadData()
