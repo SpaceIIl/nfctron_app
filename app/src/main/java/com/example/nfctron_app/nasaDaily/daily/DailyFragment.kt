@@ -71,7 +71,11 @@ class DailyFragment : Fragment() {
                         textSubheading.text = getString(R.string.explanation)
                         textExplanation.text = state.data.explanation
                         image.load(state.data.url)
-                        image.load(state.data.hdurl)
+                        image.load(state.data.hdurl) {
+                            crossfade(true)
+                            placeholder(R.drawable.baseline_image_24)
+                            error(R.drawable.baseline_image_24)
+                        }
 
                         swipeRefreshDaily.isRefreshing = false
                         swipeRefreshDaily.setOnRefreshListener {
