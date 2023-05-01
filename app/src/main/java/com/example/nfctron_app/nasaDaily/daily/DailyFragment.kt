@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import coil.ImageLoader
+import coil.imageLoader
 import coil.load
+import coil.request.ImageRequest
 import com.example.nfctron_app.R
 import com.example.nfctron_app.nasaDaily.databaseNasaDaily.NasaDailyRepository
 import com.example.nfctron_app.databinding.FragmentDailyBinding
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class DailyFragment : Fragment() {
     private var _binding: FragmentDailyBinding? = null
@@ -70,11 +73,24 @@ class DailyFragment : Fragment() {
                         textDate.text = getString(R.string.today)
                         textSubheading.text = getString(R.string.explanation)
                         textExplanation.text = state.data.explanation
-                        image.load(state.data.url)
-                        image.load(state.data.hdurl) {
-                            crossfade(true)
-                            placeholder(R.drawable.baseline_image_24)
-                            error(R.drawable.baseline_image_24)
+
+                        val context = requireContext()
+                        viewLifecycleOwner.lifecycleScope.launch {
+                            val lowQualityDrawable = context.imageLoader.execute(
+                                ImageRequest.Builder(context)
+                                    .data(state.data.url)
+                                    .build()
+                            ).drawable
+                            image.load(state.data.hdurl) {
+                                crossfade(true)
+                                placeholder(lowQualityDrawable)
+                                error(R.drawable.baseline_image_24)
+                                listener(
+                                    onSuccess = { _, _ ->
+                                        // The high-quality image has been loaded successfully
+                                    }
+                                )
+                            }
                         }
 
                         swipeRefreshDaily.isRefreshing = false
@@ -84,9 +100,6 @@ class DailyFragment : Fragment() {
                     }
 
                     viewLifecycleOwner.lifecycleScope.launch {
-                        //val dateNumberNew = LocalDate.parse(state.data.date).toEpochDay()
-                        //val dateNumberOld = LocalDate.parse(NasaDailyRepository.getNasaDaily().date).toEpochDay()
-
                         if (state.data.date > (NasaDailyRepository.getNasaDaily()?.date ?: "")) {
                             NasaDailyRepository.deleteNasaDaily()
                             NasaDailyRepository.insertNasaDaily(
@@ -97,25 +110,6 @@ class DailyFragment : Fragment() {
                                 url = state.data.url
                             )
                         }
-
-//                    context?.let { context ->
-//                        val request = ImageRequest.Builder(context)
-//                            .data(state.data.url)
-//                            .target(onSuccess = { result ->
-//                                binding.image.setImageDrawable(result)
-//                                binding.image.postDelayed({
-//                                    val hdRequest = ImageRequest.Builder(context)
-//                                        .data(state.data.hdurl)
-//                                        .target(onSuccess = { hdResult ->
-//                                            binding.image.setImageDrawable(hdResult)
-//                                        })
-//                                        .build()
-//                                    context.imageLoader.enqueue(hdRequest)
-//                                }, 1000)
-//                            })
-//                            .build()
-//                        context.imageLoader.enqueue(request)
-//                    }
                     }
                 }
             }
