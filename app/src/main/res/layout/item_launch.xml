@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="@dimen/margin_base_x2"
+    android:layout_marginHorizontal="@dimen/margin_base_x6"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -50,11 +51,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardIconImageView"
+        android:layout_marginStart="@dimen/margin_base_x6"
         android:layout_width="60dp"
         android:layout_height="70dp"
+        app:cardBackgroundColor="@color/grey_transparent"
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp"
-        app:cardBackgroundColor="@color/grey_transparent"
         app:layout_constraintBottom_toBottomOf="@id/item_launch"
         app:layout_constraintEnd_toEndOf="@id/item_launch"
         app:layout_constraintTop_toTopOf="@id/item_launch">
@@ -63,8 +65,8 @@
             android:id="@+id/iconImageView"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/baseline_push_pin_24"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:src="@drawable/baseline_push_pin_24" />
 
     </androidx.cardview.widget.CardView>
 
