@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.example.nfctron_app.R
 import com.example.nfctron_app.databinding.ItemLaunchBinding
 import com.example.nfctron_app.spacexLaunches.modelLaunches.LaunchesItem
 import java.text.DecimalFormat
@@ -20,7 +22,14 @@ class LaunchesAdapter:
     inner class ItemViewHolder(private val binding: ItemLaunchBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: LaunchesItem) {
             binding.textLaunchTitle.text = item.name
-            binding.textCountdown.text = item.date_unix.toString()
+            binding.textCountdown.text = item.date_local.toString()
+            if (item.links?.patch?.small != null) {
+                binding.imageBadge.load(item.links.patch.small)
+            } else {
+                binding.imageBadge.load(R.drawable.baseline_rocket_launch_24)
+            }
+            binding.textLivestream.text = binding.root.context.getString(R.string.livestream)
+            binding.textWiki.text = binding.root.context.getString(R.string.wiki)
         }
     }
 

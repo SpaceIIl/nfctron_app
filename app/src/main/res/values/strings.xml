@@ -10,4 +10,6 @@
     <string name="unpin_all">Unpin all</string>
     <string name="upcoming">Upcoming</string>
     <string name="sort_by">Sort by</string>
+    <string name="livestream">Livestream</string>
+    <string name="wiki">Wiki</string>
 </resources>
