@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -78,4 +80,15 @@ class LaunchesFragment : Fragment() {
             }
         }
     }
+}
+
+@Composable
+fun CarouselItem() {
+    AndroidView(
+        factory = { context ->
+            val inflater = LayoutInflater.from(context)
+            val binding = ItemLaunchBinding.inflate(inflater, null, false)
+            binding.root
+        },
+    )
 }
