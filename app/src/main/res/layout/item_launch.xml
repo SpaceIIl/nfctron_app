@@ -48,13 +48,25 @@
         app:layout_constraintStart_toEndOf="@id/cardImage"
         tools:text="Launch in 20d 5h 20m 9s" />
 
-    <ImageView
-        android:id="@+id/iconImageView"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardIconImageView"
+        android:layout_width="60dp"
         android:layout_height="70dp"
-        android:src="@drawable/baseline_push_pin_24"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/grey_transparent"
+        app:layout_constraintBottom_toBottomOf="@id/item_launch"
         app:layout_constraintEnd_toEndOf="@id/item_launch"
-        app:layout_constraintTop_toTopOf="@id/item_launch" />
+        app:layout_constraintTop_toTopOf="@id/item_launch">
+
+        <ImageView
+            android:id="@+id/iconImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/baseline_push_pin_24"
+            android:layout_gravity="center" />
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardLivestream"
