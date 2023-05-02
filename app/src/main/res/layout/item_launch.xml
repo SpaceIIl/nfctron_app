@@ -85,6 +85,7 @@
                 android:id="@+id/textLivestream"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:layout_marginStart="@dimen/margin_base_x0.5"
                 android:layout_marginEnd="@dimen/margin_base_x1"
                 android:textAppearance="@style/p"
