@@ -2,6 +2,7 @@ package com.example.nfctron_app.nasaDaily.databaseNasaDaily
 
 import androidx.room.Room
 import com.example.nfctron_app.App
+import com.example.nfctron_app.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -44,5 +45,4 @@ object NasaDailyRepository {
             nasaDailyDao.getNasaDaily()
         }
     }
-
 }
