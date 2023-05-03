@@ -6,6 +6,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -79,7 +80,7 @@ class DailyFragment : Fragment() {
 
                         textTitle.setTextColor(Color.WHITE)
                         textDate.setTextColor(Color.WHITE)
-                        textDateNumber.setTextColor(Color.GRAY)
+                        textDateNumber.setTextColor(ContextCompat.getColor(binding.root.context, R.color.grey_text))
 
 
                         val context = requireContext()

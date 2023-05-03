@@ -13,7 +13,7 @@ interface SpacexLaunchDao {
     @Query("DELETE FROM launch")
     suspend fun deleteAllSpacexLaunch()
 
-    @Query("DELETE FROM launch WHERE id = :launchId")
+    @Query("DELETE FROM launch WHERE launchId = :launchId")
     suspend fun deleteSpacexLaunch(launchId: String)
 
     @Query("SELECT * FROM launch WHERE launchId = :launchId")

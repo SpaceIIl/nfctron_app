@@ -24,6 +24,7 @@ import coil.load
 import com.example.nfctron_app.R
 import com.example.nfctron_app.databinding.FragmentLaunchesBinding
 import com.example.nfctron_app.databinding.ItemLaunchBinding
+import com.example.nfctron_app.spacexLaunches.databaseSpacexLaunches.SpacexLaunch
 import com.example.nfctron_app.spacexLaunches.databaseSpacexLaunches.SpacexLaunchRepository
 import com.example.nfctron_app.spacexLaunches.modelLaunches.LaunchesItem
 import kotlinx.coroutines.launch
@@ -55,11 +56,18 @@ class LaunchesFragment : Fragment() {
         binding.textUpcoming.text = getString(R.string.upcoming)
         binding.textSortBy.text = getString(R.string.sort_by)
 
-        val launchesAdapter = LaunchesAdapter(emptyList())
+        launchesAdapter = LaunchesAdapter(viewLifecycleOwner.lifecycleScope)
 
         viewLifecycleOwner.lifecycleScope.launch {
             val pinnedLaunches = SpacexLaunchRepository.getAllSpacexLaunch()
             launchesAdapter.submitList(pinnedLaunches)
+
+            binding.textUnpinAll.setOnClickListener {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    SpacexLaunchRepository.deleteAllSpacexLaunch()
+                    launchesAdapter.submitList(pinnedLaunches)
+                }
+            }
         }
 
         binding.recyclerPinned.apply {
@@ -90,7 +98,6 @@ class LaunchesFragment : Fragment() {
                             viewModel.retryLoadingData()
                         }
                     }
-
                     viewLifecycleOwner.lifecycleScope.launch {
                         val composeCarousel = view.findViewById<ComposeView>(R.id.composeCarousel)
 
@@ -125,16 +132,13 @@ class LaunchesFragment : Fragment() {
                                         } else {
                                             Toast.makeText(requireContext(), "Launch already pinned", Toast.LENGTH_SHORT).show()
                                         }
+                                        val pinnedLaunches = SpacexLaunchRepository.getAllSpacexLaunch()
+                                        launchesAdapter.submitList(pinnedLaunches)
                                     }
                                 }
-
                                 AndroidView(factory = { binding.root }, modifier = Modifier.width(columnWidth.dp))
                             }
                         }
-                    }
-
-                    binding.recyclerPinned.post {
-                        binding.recyclerPinned.layoutManager?.scrollToPosition(0)
                     }
                 }
             }
