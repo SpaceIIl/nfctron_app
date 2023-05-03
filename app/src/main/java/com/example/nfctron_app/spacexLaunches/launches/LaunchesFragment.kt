@@ -1,5 +1,7 @@
 package com.example.nfctron_app.spacexLaunches.launches
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -59,7 +61,7 @@ class LaunchesFragment : Fragment() {
         binding.textUpcoming.text = getString(R.string.upcoming)
         binding.textSortBy.text = getString(R.string.sort_by)
 
-        launchesAdapter = LaunchesAdapter(viewLifecycleOwner.lifecycleScope)
+        launchesAdapter = LaunchesAdapter(requireContext(), viewLifecycleOwner.lifecycleScope)
 
         viewLifecycleOwner.lifecycleScope.launch {
             val pinnedLaunches = SpacexLaunchRepository.getAllSpacexLaunch()
@@ -132,6 +134,16 @@ class LaunchesFragment : Fragment() {
                                 }
                                 binding.textLivestream.text = binding.root.context.getString(R.string.livestream)
                                 binding.textWiki.text = binding.root.context.getString(R.string.wiki)
+
+                                binding.cardLivestream.setOnClickListener {
+                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.links?.webcast))
+                                    startActivity(intent)
+                                }
+
+                                binding.iconShare.setOnClickListener {
+                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.links?.wikipedia))
+                                    startActivity(intent)
+                                }
 
                                 binding.cardIconImageView.setOnClickListener {
                                     val webcast = item.links?.webcast ?: ""

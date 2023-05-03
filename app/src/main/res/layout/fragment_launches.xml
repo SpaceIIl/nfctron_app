@@ -28,6 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/h3"
+                app:startIconDrawable="@drawable/baseline_search_24"
+                app:boxStrokeColor="@color/transparent"
                 android:layout_margin="@dimen/margin_base_x4"
                 android:hint="@string/type_misssion_payload"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -1,10 +1,14 @@
 package com.example.nfctron_app.spacexLaunches.launches
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +21,7 @@ import com.example.nfctron_app.spacexLaunches.databaseSpacexLaunches.SpacexLaunc
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class LaunchesAdapter(private val lifecycleScope: CoroutineScope) :
+class LaunchesAdapter(private val context: Context, private val lifecycleScope: CoroutineScope) :
     ListAdapter<SpacexLaunch, LaunchesAdapter.ItemViewHolder>(TransactionDiffCallback()) {
 
     inner class ItemViewHolder(private val binding: ItemLaunchBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -33,6 +37,16 @@ class LaunchesAdapter(private val lifecycleScope: CoroutineScope) :
             binding.textLivestream.text = binding.root.context.getString(R.string.livestream)
             binding.textWiki.text = binding.root.context.getString(R.string.wiki)
             binding.cardIconImageView.setBackgroundResource(R.drawable.rounded_corner_background)
+
+            binding.cardLivestream.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.webcast))
+                context.startActivity(intent)
+            }
+
+            binding.iconShare.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.wikipedia))
+                context.startActivity(intent)
+            }
 
             binding.cardIconImageView.setOnClickListener {
                 lifecycleScope.launch {
