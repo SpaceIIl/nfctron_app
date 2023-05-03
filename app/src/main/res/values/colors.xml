@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red_button">#FF7070</color>
     <color name="grey_transparent">#08000000</color>
+    <color name="grey_text">#B2000000</color>
 
     <color name="dark_blue">#050422</color>
     <color name="blue">#246BFD</color>

@@ -1,33 +1,24 @@
 package com.example.nfctron_app.spacexLaunches.launches
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.nfctron_app.R
 import com.example.nfctron_app.databinding.ItemLaunchBinding
+import com.example.nfctron_app.spacexLaunches.databaseSpacexLaunches.SpacexLaunch
 import com.example.nfctron_app.spacexLaunches.modelLaunches.LaunchesItem
-import java.text.DecimalFormat
 
-class LaunchesAdapter:
-    ListAdapter<LaunchesItem, LaunchesAdapter.ItemViewHolder>(TransactionDiffCallback()) {
+class LaunchesAdapter(private val launches: List<SpacexLaunch>) :
+    ListAdapter<SpacexLaunch, LaunchesAdapter.ItemViewHolder>(TransactionDiffCallback()) {
     inner class ItemViewHolder(private val binding: ItemLaunchBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(item: LaunchesItem) {
+        fun onBind(item: SpacexLaunch) {
             binding.textLaunchTitle.text = item.name
-            binding.textCountdown.text = item.date_local.toString()
-            if (item.links?.patch?.small != null) {
-                binding.imageBadge.load(item.links.patch.small)
+            binding.textCountdown.text = item.dateLocal
+            if (item.icon != null) {
+                binding.imageBadge.load(item.icon)
             } else {
                 binding.imageBadge.load(R.drawable.baseline_rocket_launch_24)
             }
@@ -36,11 +27,11 @@ class LaunchesAdapter:
         }
     }
 
-    private class TransactionDiffCallback : DiffUtil.ItemCallback<LaunchesItem>() {
-        override fun areItemsTheSame(oldItem: LaunchesItem, newItem: LaunchesItem): Boolean =
-            oldItem.flight_number == newItem.flight_number
+    private class TransactionDiffCallback : DiffUtil.ItemCallback<SpacexLaunch>() {
+        override fun areItemsTheSame(oldItem: SpacexLaunch, newItem: SpacexLaunch): Boolean =
+            oldItem.launchId == newItem.launchId
 
-        override fun areContentsTheSame(oldItem: LaunchesItem, newItem: LaunchesItem): Boolean =
+        override fun areContentsTheSame(oldItem: SpacexLaunch, newItem: SpacexLaunch): Boolean =
             oldItem == newItem
     }
 

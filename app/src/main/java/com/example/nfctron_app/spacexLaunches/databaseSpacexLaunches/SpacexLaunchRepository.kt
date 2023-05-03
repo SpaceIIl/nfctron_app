@@ -4,6 +4,7 @@ import androidx.room.Room
 import com.example.nfctron_app.App
 import com.example.nfctron_app.AppDatabase
 import com.example.nfctron_app.nasaDaily.databaseNasaDaily.NasaDaily
+import com.example.nfctron_app.spacexLaunches.modelLaunches.LaunchesItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -12,13 +13,14 @@ object SpacexLaunchRepository {
         App.instance.applicationContext,
         AppDatabase::class.java,
         "app_database"
-    ).build()
+    ).fallbackToDestructiveMigration().build()
 
     private val spacexLaunchDao = database.spacexLaunchDao()
 
     suspend fun insertSpacexLaunch(
         webcast: String,
         wikipedia: String,
+        icon: String,
         name: String,
         dateLocal: String,
         launchId: String
@@ -27,6 +29,7 @@ object SpacexLaunchRepository {
             val spacexLaunch = SpacexLaunch(
                 webcast = webcast,
                 wikipedia = wikipedia,
+                icon = icon,
                 name = name,
                 dateLocal = dateLocal,
                 launchId = launchId
@@ -44,6 +47,12 @@ object SpacexLaunchRepository {
     suspend fun deleteSpacexLaunch(launchId: String) {
         return withContext(Dispatchers.IO) {
             spacexLaunchDao.deleteSpacexLaunch(launchId)
+        }
+    }
+
+    suspend fun getSpacexLaunchById(launchId: String): SpacexLaunch? {
+        return withContext(Dispatchers.IO) {
+            spacexLaunchDao.getSpacexLaunchById(launchId)
         }
     }
 

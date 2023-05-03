@@ -9,6 +9,7 @@ data class SpacexLaunch(
     val id: Long = 0L,
     val webcast: String,
     val wikipedia: String,
+    val icon: String,
     val name: String,
     val dateLocal: String,
     val launchId: String

@@ -1,6 +1,8 @@
 package com.example.nfctron_app.nasaDaily.daily
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,6 +60,7 @@ class DailyFragment : Fragment() {
                                 viewModel.retryLoadingData()
                             }
                         }
+
                     }
                 }
                 is DailyScreenState.Loading -> {
@@ -73,6 +76,11 @@ class DailyFragment : Fragment() {
                         textDate.text = getString(R.string.today)
                         textSubheading.text = getString(R.string.explanation)
                         textExplanation.text = state.data.explanation
+
+                        textTitle.setTextColor(Color.WHITE)
+                        textDate.setTextColor(Color.WHITE)
+                        textDateNumber.setTextColor(Color.GRAY)
+
 
                         val context = requireContext()
                         viewLifecycleOwner.lifecycleScope.launch {

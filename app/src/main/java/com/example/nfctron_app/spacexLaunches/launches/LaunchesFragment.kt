@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
@@ -17,13 +17,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.example.nfctron_app.R
 import com.example.nfctron_app.databinding.FragmentLaunchesBinding
 import com.example.nfctron_app.databinding.ItemLaunchBinding
-import com.example.nfctron_app.nasaDaily.databaseNasaDaily.NasaDailyRepository
+import com.example.nfctron_app.spacexLaunches.databaseSpacexLaunches.SpacexLaunchRepository
 import com.example.nfctron_app.spacexLaunches.modelLaunches.LaunchesItem
 import kotlinx.coroutines.launch
 
@@ -31,6 +32,7 @@ class LaunchesFragment : Fragment() {
     private var _binding: FragmentLaunchesBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<LaunchesViewModel>()
+    private lateinit var launchesAdapter: LaunchesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,14 +50,17 @@ class LaunchesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         binding.textPinned.text = getString(R.string.pinned)
         binding.textUnpinAll.text = getString(R.string.unpin_all)
         binding.textUpcoming.text = getString(R.string.upcoming)
         binding.textSortBy.text = getString(R.string.sort_by)
 
-        val launchesAdapter = LaunchesAdapter()
+        val launchesAdapter = LaunchesAdapter(emptyList())
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val pinnedLaunches = SpacexLaunchRepository.getAllSpacexLaunch()
+            launchesAdapter.submitList(pinnedLaunches)
+        }
 
         binding.recyclerPinned.apply {
             layoutManager = LinearLayoutManager(context)
@@ -105,12 +110,29 @@ class LaunchesFragment : Fragment() {
                                 binding.textLivestream.text = binding.root.context.getString(R.string.livestream)
                                 binding.textWiki.text = binding.root.context.getString(R.string.wiki)
 
+                                binding.cardIconImageView.setOnClickListener {
+                                    val webcast = item.links?.webcast ?: ""
+                                    val wikipedia = item.links?.wikipedia ?: ""
+                                    val icon = item.links?.patch?.small ?: ""
+                                    val name = item.name ?: ""
+                                    val dateLocal = item.date_local?: ""
+                                    val launchId = item.id ?: ""
+
+                                    viewLifecycleOwner.lifecycleScope.launch {
+                                        val existingItem = SpacexLaunchRepository.getSpacexLaunchById(launchId)
+                                        if (existingItem == null) {
+                                            SpacexLaunchRepository.insertSpacexLaunch(webcast, wikipedia, icon, name, dateLocal, launchId)
+                                        } else {
+                                            Toast.makeText(requireContext(), "Launch already pinned", Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                }
+
                                 AndroidView(factory = { binding.root }, modifier = Modifier.width(columnWidth.dp))
                             }
                         }
                     }
 
-                    launchesAdapter.submitList(state.data)
                     binding.recyclerPinned.post {
                         binding.recyclerPinned.layoutManager?.scrollToPosition(0)
                     }

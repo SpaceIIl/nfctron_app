@@ -58,7 +58,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerPinned"
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
+                android:layout_height="220dp"
                 android:layout_marginVertical="@dimen/margin_base_x4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_max="230dp"
