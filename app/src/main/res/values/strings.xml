@@ -12,4 +12,5 @@
     <string name="sort_by">Sort by</string>
     <string name="livestream">Livestream</string>
     <string name="wiki">Wiki</string>
+    <string name="type_misssion_payload">Type in mission or payload name...</string>
 </resources>

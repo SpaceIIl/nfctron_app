@@ -1,6 +1,7 @@
 package com.example.nfctron_app.spacexLaunches.launches
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalConfiguration
@@ -75,6 +78,8 @@ class LaunchesFragment : Fragment() {
             adapter = launchesAdapter
         }
 
+        //val searchQuery = binding.searchBarFilter.text.toString()
+
         viewModel.screenState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is LaunchesScreenState.Error -> {
@@ -100,12 +105,22 @@ class LaunchesFragment : Fragment() {
                     }
 
                     viewLifecycleOwner.lifecycleScope.launch {
-                        val composeCarousel = view.findViewById<ComposeView>(R.id.composeCarousel)
+                        val composeCarousel = binding.composeCarousel
 
                         composeCarousel.setContent {
                             val carouselItems = state.data
                             val columnWidthScreen = availableWidthDp().toInt()
-                            CarouselView(items = carouselItems, columns = 2, columnWidth = columnWidthScreen) { item, columnWidth ->
+
+                            val searchQuery = remember { mutableStateOf("") }
+
+                            searchQuery.value = binding.searchBarFilter.text.toString()
+
+                            CarouselView(
+                                items = carouselItems,
+                                columns = 2,
+                                columnWidth = columnWidthScreen,
+                                searchQuery = searchQuery.value,
+                            ) { item, columnWidth ->
                                 val binding = ItemLaunchBinding.inflate(LayoutInflater.from(context), null, false)
 
                                 binding.textLaunchTitle.text = item.name
@@ -152,14 +167,22 @@ fun CarouselView(
     items: List<LaunchesItem>,
     columns: Int,
     columnWidth: Int,
+    searchQuery: String,
     content: @Composable (LaunchesItem, Int) -> Unit
 ) {
+    val filteredItems = items.filter { item ->
+        item.name.contains(searchQuery, ignoreCase = true) ||
+                item.payloads.any { payload ->
+                    payload.contains(searchQuery, ignoreCase = true)
+                }
+    }
+
     LazyHorizontalGrid(
         GridCells.Fixed(columns),
         contentPadding = PaddingValues(start = 48.dp)
     ) {
-        items(count = items.size) { index ->
-            val item = items[index]
+        items(count = filteredItems.size) { index ->
+            val item = filteredItems[index]
             Row {
                 Box(modifier = Modifier.width(columnWidth.dp)) {
                     content(item, columnWidth)

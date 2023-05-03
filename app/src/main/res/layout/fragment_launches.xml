@@ -23,16 +23,23 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
-            <TextView
-                android:id="@+id/placeholderSearchbar"
-                android:textAppearance="@style/h3"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/searchBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAppearance="@style/h3"
                 android:layout_margin="@dimen/margin_base_x4"
+                android:hint="@string/type_misssion_payload"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Searchbar" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/searchBarFilter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/textPinned"
@@ -42,7 +49,7 @@
                 android:layout_marginHorizontal="@dimen/margin_base_x6"
                 android:layout_marginVertical="@dimen/margin_base_x4"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/placeholderSearchbar"
+                app:layout_constraintTop_toBottomOf="@id/searchBar"
                 tools:text="Pinned" />
 
             <TextView
