@@ -11,6 +11,7 @@
     <color name="grey_transparent">#08000000</color>
     <color name="grey_text">#575757</color>
     <color name="yellow_pin">#FFDD00</color>
+    <color name="transparent">#00FFFFFF</color>
 
     <color name="dark_blue">#050422</color>
     <color name="blue">#246BFD</color>

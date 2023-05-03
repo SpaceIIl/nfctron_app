@@ -98,6 +98,7 @@ class LaunchesFragment : Fragment() {
                             viewModel.retryLoadingData()
                         }
                     }
+
                     viewLifecycleOwner.lifecycleScope.launch {
                         val composeCarousel = view.findViewById<ComposeView>(R.id.composeCarousel)
 
