@@ -3,7 +3,6 @@ package com.example.nfctron_app.spacexLaunches.databaseSpacexLaunches
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.nfctron_app.spacexLaunches.modelLaunches.LaunchesItem
 
 @Dao
 interface SpacexLaunchDao {

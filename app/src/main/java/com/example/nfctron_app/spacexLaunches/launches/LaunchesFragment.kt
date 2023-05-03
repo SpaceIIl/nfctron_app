@@ -143,7 +143,7 @@ class LaunchesFragment : Fragment() {
                                     val webcast = item.links?.webcast ?: ""
                                     val wikipedia = item.links?.wikipedia ?: ""
                                     val icon = item.links?.patch?.small ?: ""
-                                    val name = item.name ?: ""
+                                    val name = item.name
                                     val dateLocal = item.date_local?: ""
                                     val launchId = item.id ?: ""
 
@@ -208,7 +208,5 @@ fun availableWidthDp(): Float {
     val density = LocalDensity.current
     val twelveDpInPixels = with(density) { 28.dp.toPx() }
 
-    val availableWidthMinus12dp = screenWidthDp - twelveDpInPixels
-
-    return availableWidthMinus12dp
+    return screenWidthDp - twelveDpInPixels
 }
