@@ -1,13 +1,10 @@
 package com.example.nfctron_app.spacexLaunches.launches
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.nfctron_app.nasaDaily.daily.DailyScreenState
 import kotlinx.coroutines.launch
-import com.example.nfctron_app.nasaDaily.nasaDataSource.NasaDataSource.getNasaDaily
 import com.example.nfctron_app.spacexLaunches.spacexDataSource.SpacexDataSource.getLaunches
 
 class LaunchesViewModel : ViewModel() {
