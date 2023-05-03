@@ -13,7 +13,7 @@ object SpacexLaunchRepository {
         App.instance.applicationContext,
         AppDatabase::class.java,
         "app_database"
-    ).fallbackToDestructiveMigration().build()
+    ).build()
 
     private val spacexLaunchDao = database.spacexLaunchDao()
 

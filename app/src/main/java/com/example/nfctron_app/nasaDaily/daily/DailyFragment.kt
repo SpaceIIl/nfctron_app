@@ -82,8 +82,8 @@ class DailyFragment : Fragment() {
                         textDate.setTextColor(Color.WHITE)
                         textDateNumber.setTextColor(ContextCompat.getColor(binding.root.context, R.color.grey_text))
 
-
                         val context = requireContext()
+
                         viewLifecycleOwner.lifecycleScope.launch {
                             val lowQualityDrawable = context.imageLoader.execute(
                                 ImageRequest.Builder(context)

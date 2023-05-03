@@ -23,13 +23,16 @@ class LaunchesAdapter(private val context: Context, private val lifecycleScope: 
     inner class ItemViewHolder(private val binding: ItemLaunchBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: SpacexLaunch) {
             val isConnected = binding.root.context.isNetworkConnected()
+
             binding.textLaunchTitle.text = item.name
             binding.textCountdown.text = item.dateLocal
+
             if (isConnected && item.icon != null && "http" in item.icon) {
                 binding.imageBadge.load(item.icon)
             } else {
                 binding.imageBadge.load(R.drawable.baseline_rocket_launch_24)
             }
+
             binding.textLivestream.text = binding.root.context.getString(R.string.livestream)
             binding.textWiki.text = binding.root.context.getString(R.string.wiki)
             binding.cardIconImageView.setBackgroundResource(R.drawable.rounded_corner_background)

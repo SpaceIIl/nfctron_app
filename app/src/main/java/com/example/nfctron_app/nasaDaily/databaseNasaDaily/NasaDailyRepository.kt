@@ -11,7 +11,7 @@ object NasaDailyRepository {
         App.instance.applicationContext,
         AppDatabase::class.java,
         "app_database"
-    ).fallbackToDestructiveMigration().build()
+    ).build()
 
     private val nasaDailyDao = database.nasaDailyDao()
 

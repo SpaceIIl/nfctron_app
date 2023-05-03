@@ -76,8 +76,6 @@ class LaunchesFragment : Fragment() {
             adapter = launchesAdapter
         }
 
-        //val searchQuery = binding.searchBarFilter.text.toString()
-
         viewModel.screenState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is LaunchesScreenState.Error -> {
